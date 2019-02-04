@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.assignment.example.project.viewmodel.DataViewModel"/>
+    </data>
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/data_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:adapter="@{viewModel.adapter}"
+        app:data="@{viewModel.data}"
+        android:layout_margin="10dp"
+        tools:context="com.assignment.example.project.view.MainActivity"/>
+</layout>

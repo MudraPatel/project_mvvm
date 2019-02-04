@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="status"
+            type="java.lang.Boolean"/>
+        <variable
+            name="viewModel"
+            type="com.assignment.example.project.viewmodel.DataItemViewModel"/>
+
+    </data>
+
+   <!-- <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        app:text="@{viewModel.title}"
+        tools:text="Item Title"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_shape"
+        android:layout_margin="10dp"
+        android:padding="05dp"
+        android:elevation="2dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_profile"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="08dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dummy"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:imageUrl="@{viewModel.imageUrl}"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/iv_profile"
+            android:padding="04dp"
+            android:text="@string/name"
+            android:textAlignment="center"
+            android:textColor="@color/text_name_color"
+            android:textSize="18sp"
+            app:text="@{viewModel.name}"
+            tools:text="Item Name"            />
+
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:text="@string/address"
+            android:textAlignment="center"
+            android:textColor="@color/text_gray_color"
+            android:textSize="16sp"
+            app:text="@{viewModel.address}"
+            tools:text="Item Address"/>
+
+        <TextView
+            android:id="@+id/tv_qualification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_address"
+            android:layout_centerHorizontal="true"
+            android:text="@string/qualification"
+            android:textAlignment="center"
+            android:textColor="@color/text_gray_color"
+            android:textSize="16sp"
+            app:text="@{viewModel.qualification}"
+            tools:text="Item Qualification"/>
+
+        <RelativeLayout
+            android:id="@+id/action_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_qualification"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="05dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:visibility="@{viewModel.actionButtonVisibility, default=gone}"
+            >
+
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton
+                android:id="@+id/img_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="08dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="05dp"
+                android:padding="16dp"
+                android:background="@drawable/bg_rounded_shape"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_cancel"
+                android:tint="@color/red"
+                android:theme="@style/BluePrimaryButton"
+                app:finalCornerAngle="50dp"
+                app:initialCornerAngle="0dp"
+                app:spinning_bar_color="#FFFFFF"
+                app:spinning_bar_padding="0dp"
+                app:spinning_bar_width="3dp"
+                android:onClick="@{(v) -> viewModel.onClickCancel(v)}"
+                />
+
+            <TextView
+                android:id="@+id/cancel_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Decline"
+                android:layout_below="@id/img_cancel"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="18dp"
+                />
+
+
+
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton
+                android:id="@+id/img_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="08dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="05dp"
+                android:layout_toRightOf="@id/img_cancel"
+                android:padding="16dp"
+                android:background="@drawable/bg_rounded_shape"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_accept"
+                android:tint="@color/green"
+                android:theme="@style/BluePrimaryButton"
+                app:finalCornerAngle="50dp"
+                app:initialCornerAngle="0dp"
+                app:spinning_bar_color="#FFFFFF"
+                app:spinning_bar_padding="0dp"
+                app:spinning_bar_width="3dp"
+                android:layout_toEndOf="@id/img_cancel"
+                android:onClick="@{(v) -> viewModel.onClickAccept(v)}"
+
+                />
+
+            <TextView
+                android:id="@+id/accept_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:layout_below="@id/img_accept"
+                android:layout_toRightOf="@id/cancel_txt"
+                android:layout_marginLeft="28dp"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/display_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/action_button"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/display_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="08dp"
+                android:textSize="16sp"
+                android:background="@drawable/bg_rounded_shape"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                app:text="@{viewModel.message}"
+                tools:text="Item message"
+                android:visibility="@{viewModel.statusVisibility, default=gone}"
+
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

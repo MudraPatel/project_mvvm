@@ -1,0 +1,9 @@
+
+<resources>
+    <string name="app_name">Project</string>
+    <string name="name">Name</string>
+    <string name="address">Mumbai</string>
+    <string name="qualification">Engineering</string>
+    <string name="loading">Loading</string>
+
+</resources>
