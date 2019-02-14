@@ -12,4 +12,6 @@
     <color name="green">#2fff3a</color>
     <color name="red">#a3081a</color>
     <color name="black">#000</color>
+    <color name="checkedbox">#aa504f4f</color>
+
 </resources>

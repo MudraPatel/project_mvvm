@@ -26,6 +26,7 @@ public class Network {
     public static String decline = "Declined";
     public static String accept = "Accepted";
     public static String not = "Not";
+//    public static boolean selectedUserStatus = false;
 
 
     public static String capitalize(final String line) {

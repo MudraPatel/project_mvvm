@@ -11,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,18 +20,24 @@ import com.assignment.example.project.BR;
 import com.assignment.example.project.R;
 import com.assignment.example.project.model.DataModel;
 import com.assignment.example.project.network.Network;
+import com.assignment.example.project.network.RealmController;
+import com.assignment.example.project.view.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
+import io.realm.Realm;
 
 
 public class DataItemViewModel extends BaseObservable {
     private DataModel dataModel;
     private Context context;
+    private boolean selectedUserStatus;
 
-    public DataItemViewModel( Context context, DataModel dataModel) {
+
+    public DataItemViewModel( Context context, DataModel dataModel, boolean selectedUserStatus) {
         this.context = context;
         this.dataModel = dataModel;
+        this.selectedUserStatus = selectedUserStatus;
     }
 
     public void setUp() {
@@ -68,6 +76,12 @@ public class DataItemViewModel extends BaseObservable {
     public String getImageUrl(){
         return dataModel.getImageUrl();
     }
+
+    @Bindable
+    public boolean getStatus(){
+        return dataModel.isCheckBoxStatus();
+    }
+
 
     @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
@@ -158,10 +172,22 @@ public class DataItemViewModel extends BaseObservable {
     }
 
     public int statusVisibility(){
-        return dataModel.isStatus() ? View.GONE : View.VISIBLE;
+        return View.GONE;
+        //dataModel.isStatus() ? View.GONE : View.VISIBLE;
     }
 
+    public int checkBoxVisibility(){
+        Log.e("CHECK", selectedUserStatus + ":::");
+        return selectedUserStatus ? View.GONE : View.VISIBLE;
+    }
     public int actionButtonVisibility(){
         return dataModel.isStatus() ? View.VISIBLE : View.GONE;
+    }
+
+    public void onClickCheckBox(CompoundButton compoundButton, boolean checked) {
+        dataModel.setCheckBoxStatus(checked);
+         RealmController.getInstance().updateCheckBoxStatus(dataModel.getUuid(), checked);
+        notifyPropertyChanged(BR.data);
+
     }
 }

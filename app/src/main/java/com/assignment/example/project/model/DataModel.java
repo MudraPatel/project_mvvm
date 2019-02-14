@@ -23,8 +23,12 @@ package com.assignment.example.project.model;
 
 import android.support.annotation.Nullable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class DataModel {
+
+public class DataModel extends RealmObject {
+    @PrimaryKey
     private String uuid;
     private String title;
     private String address;
@@ -33,11 +37,12 @@ public class DataModel {
     private String message;
     private boolean status;
     private String imageUrl;
+    private boolean checkBoxStatus;
 
     public DataModel() {
     }
 
-    public DataModel(String uuid, String name, String address, String qualification, String imageUrl, String message, boolean status ){
+    public DataModel(String uuid, String name, String address, String qualification, String imageUrl, String message, boolean status , boolean checkBoxStatus){
         this.uuid = uuid;
         this.name = name;
         this.address = address;
@@ -45,6 +50,7 @@ public class DataModel {
         this.imageUrl = imageUrl;
         this.message = message;
         this.status = status;
+        this.checkBoxStatus = checkBoxStatus;
     }
 
     @Nullable
@@ -110,5 +116,13 @@ public class DataModel {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isCheckBoxStatus() {
+        return checkBoxStatus;
+    }
+
+    public void setCheckBoxStatus(boolean checkBoxStatus) {
+        this.checkBoxStatus = checkBoxStatus;
     }
 }

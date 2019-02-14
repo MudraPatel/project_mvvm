@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,14 +9,33 @@
             type="com.assignment.example.project.viewmodel.DataViewModel"/>
     </data>
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/data_recycler_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:adapter="@{viewModel.adapter}"
-        app:data="@{viewModel.data}"
-        android:layout_margin="10dp"
-        tools:context="com.assignment.example.project.view.MainActivity"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/data_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:adapter="@{viewModel.adapter}"
+            app:data="@{viewModel.data}"
+            android:layout_margin="10dp"
+            tools:context="com.assignment.example.project.view.MainActivity"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end|bottom"
+            android:src="@android:drawable/ic_menu_send"
+            android:layout_margin="25dp"
+            android:visibility="@{viewModel.statusVisibility, default=gone}"
+            android:onClick="@{(v) -> viewModel.onClickProceed(v)}"
+            />
+    </RelativeLayout>
 </layout>

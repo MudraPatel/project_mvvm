@@ -38,9 +38,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/iv_profile"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="08dp"
             android:scaleType="centerCrop"
@@ -49,19 +48,37 @@
             app:civ_border_width="2dp"
             app:imageUrl="@{viewModel.imageUrl}"/>
 
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:button="@drawable/custom_checkbox"
+            app:checked="@{viewModel.status}"
+            android:visibility="@{viewModel.checkBoxVisibility, default=gone}"
+            android:onCheckedChanged="@{(compoundButton, checked) -> viewModel.onClickCheckBox(compoundButton, checked)}"
+            android:padding="08dp" />
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/iv_profile"
+            android:layout_toRightOf="@id/iv_profile"
+            android:layout_toLeftOf="@id/checkbox"
             android:padding="04dp"
+            android:layout_marginTop="10dp"
             android:text="@string/name"
             android:textAlignment="center"
             android:textColor="@color/text_name_color"
             android:textSize="18sp"
             app:text="@{viewModel.name}"
-            tools:text="Item Name"            />
+            tools:text="Item Name"
+            android:layout_toEndOf="@id/iv_profile"
+            android:layout_toStartOf="@id/checkbox" />
 
 
         <TextView
@@ -70,12 +87,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
             android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/iv_profile"
+            android:layout_toRightOf="@id/iv_profile"
+            android:layout_toLeftOf="@id/checkbox"
+            android:layout_toStartOf="@id/checkbox"
             android:text="@string/address"
             android:textAlignment="center"
             android:textColor="@color/text_gray_color"
             android:textSize="16sp"
             app:text="@{viewModel.address}"
-            tools:text="Item Address"/>
+            tools:text="Item Address"
+             />
 
         <TextView
             android:id="@+id/tv_qualification"
@@ -83,12 +105,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_address"
             android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/iv_profile"
+            android:layout_toRightOf="@id/iv_profile"
+            android:layout_toLeftOf="@id/checkbox"
+            android:layout_toStartOf="@id/checkbox"
+
             android:text="@string/qualification"
             android:textAlignment="center"
             android:textColor="@color/text_gray_color"
             android:textSize="16sp"
             app:text="@{viewModel.qualification}"
-            tools:text="Item Qualification"/>
+            tools:text="Item Qualification"
+            />
 
         <RelativeLayout
             android:id="@+id/action_button"
@@ -196,7 +224,6 @@
                 app:text="@{viewModel.message}"
                 tools:text="Item message"
                 android:visibility="@{viewModel.statusVisibility, default=gone}"
-
                 />
 
         </RelativeLayout>

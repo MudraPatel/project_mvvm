@@ -26,11 +26,23 @@ import android.databinding.DataBindingUtil;
 
 import com.assignment.example.project.databinding.AppDataBindingComponent;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 
 public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
         DataBindingUtil.setDefaultComponent(new AppDataBindingComponent());
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration
+                .Builder()
+                .name(Realm.DEFAULT_REALM_NAME)
+                .schemaVersion(0)
+//                .migration(new Migration())
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
     }
 }
